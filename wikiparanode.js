@@ -17,7 +17,12 @@ var getText = function(minWordCount, cb) {
                 var index = Math.round(Math.random() * paragraphs.length);
                 var paragraph = $(paragraphs[index]);
                 
-                cb(paragraph.text());
+                if(paragraph.text().split(' ').length > minWordCount){
+                  cb(paragraph.text());
+                }else{
+                  sys.puts('.');
+                  return worker();
+                }
             });
         } else {
             sys.puts("Error retrieving url [" + response.statusCode + "]");
